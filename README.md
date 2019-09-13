@@ -23,10 +23,28 @@ In this challenge, you are to build the Smurfs village once again, only this tim
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] What problem does the context API help solve?
+
+The context API helps us to simplify our state management.  Context provides a way for us to pass props from one component to another, without having to pass through intermediary components.  
+
 - [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+In redux, actions are essentially events triggered by the user that can change the state of the application.  
+Reducers allow us to write pure functions and manage our state in a predicable way – they take in two arguments – the current state and an action and returns a new, updated state based on the action.
+The store is a giant object in a redux app that stores all of the state of the app.  That is why it is known as the ‘single source of truth’ – because all of the state that is being used throughout the app comes from the redux store. 
+
+
 - [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+Application state is global throughout the app and component state is local to the component that it is being used on.  A good time to use application state would be where you need to use the same state in multiple parts throughout the app.  A good time to use component state would be if you only needed to use state specific to one component.  
+
 - [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+Redux thunk is a middleware – it allows us to write action creators that return a function instead of an action.  It changes our action creators by allowing us to delay the dispatch of an action, only dispatch an action if certain conditions are met, or stop the dispatch of an action entirely.
+
 - [ ] What is your favorite state management system you've learned and this sprint? Please explain why!
+
+My favorite state management system that I’ve used on this sprint has been the context API, I feel like it greatly simplifies the way that props are passed throughout an application.  I’ve also enjoyed Redux; however, I found it much more complex in the way that actions, reducers, and components need to be set up in such a way to employ it.  I plan to continue practicing Redux as I feel that it probably is the most effective way to pass state throughout an application.
+
 
 ## Project Set Up
 
