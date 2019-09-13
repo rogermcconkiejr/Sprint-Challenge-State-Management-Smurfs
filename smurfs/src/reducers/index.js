@@ -1,13 +1,14 @@
 import {
     FETCHING_SMURF_START,
     FETCHING_SMURF_SUCCESS,
-    FETCHING_SMURF_FAILURE
+    ADD_SMURF
   } from "../actions";
   
   const initialState = {
     smurf:[],
     isFetching: false,
-    error: ""
+    error: "",
+    newSmurf:{}
   };
   
   export const reducer = (state = initialState, action) => {
@@ -26,7 +27,12 @@ import {
           error:"",
           smurf: action.payload
         };
-        console.log(state);
+        case ADD_SMURF:
+            return [...state,
+                {
+                newSmurf: action.payload
+                }
+            ];
       default:
         return state;
     }

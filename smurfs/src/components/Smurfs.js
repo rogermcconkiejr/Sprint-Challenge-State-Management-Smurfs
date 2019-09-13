@@ -10,12 +10,13 @@ const Smurfs = props => {
       };
 
     if(props.isFetching) {
-        return <h3>Loading Player Data...</h3>
+        return <h3>Loading Smurf Data...</h3>
     }
+
     return (
         <div>
             {props.smurf.map(smurf=>(
-                <h3> Name: {smurf.name}, Age: {smurf.age}, Height: {smurf.height}</h3>
+                <h3 key={smurf.id}> Name: {smurf.name}, Age: {smurf.age}, Height: {smurf.height}</h3>
             ))}
             <button onClick={fetchSmurf}>Show Smurfs!</button>
         </div>

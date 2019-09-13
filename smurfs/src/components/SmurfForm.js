@@ -1,84 +1,73 @@
-import React, {useState, useEffect} from "react";
-import { withFormik, Form, Field } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
 
-function LoginForm({ errors, touched, values, status }) {
-    const [smurfs, setSmurfs] = useState(smurf);
-    useEffect(()=> {
-        if (status) {
-            setSmurfs([...smurfs, status]);
-        }
-    }, [status]);
+import { postSmurf } from '../actions';
 
-    return (
-      <div className = "loginForm">
-        <h1>User Form</h1>
-        <Form>
-            <Field type="text" name="name" placeholder="Name" />
-            {touched.name && errors.name && (
-            <p className="error">{errors.name}</p> 
-             )}
-            <Field type="email" name="email" placeholder ="Email Address" />
-            {touched.email && errors.email && (
-             <p className="error">{errors.email}</p> 
-            )}
-            <Field type="password" name="password" placeholder="Password" />
-            {touched.password && errors.password && (
-             <p className="error">{errors.password}</p> 
-             )}
-            <label className="checkbox-container">
-                Terms of Service
-                <Field 
-                    type="checkbox"
-                    name="TOS"
-                    checked={values.TOS}
+const SmurfForm = props => {
+    const postNewSmurf = e => {
+        e.preventDefault();
+        props.postSmurf();
+      };
+
+    const [newSmurf, setNewSmurf] = useState({ Name: "", Age: "", Height: ""});
+    const changeHandler = event => {
+        console.log(event.target.value);
+        setNewSmurf({...newSmurf, [event.target.name]: event.target.value});
+        console.log(newSmurf);
+    }
+    // const submitForm = event => {
+    //     event.preventDefault();
+    //     const addNewSmurf = {
+    //         ...newSmurf,
+    //         id: Date.now()
+    //     };
+    //     const addNewMember = (props.smurf) => {
+    //         setMembers([...members, member]);
+    //       }
+    //     addNewMember(addNewSmurf);
+    //     setMember({name:"", age: "", height:""});
+    // };
+      return (
+        <div>
+            <div className = "formContainer">
+            <form>
+                <label htmlFor="name">Name</label>
+                <input
+                type="text"
+                name="name"
+                placeholder="name"
+                value={newSmurf.name}
+                onChange={changeHandler}
                 />
-                <span className="checkmark" />
-            </label>
-            <Field component="select" className = "userSelect" name="selectBox">
-            <option>Please Choose a Role</option>
-            <option>Front-End Developer</option>    
-            <option>Back-End Developer</option>    
-            <option>Full-Stack Developer</option>    
-            </Field>
-            <button>Submit!</button>
-        </Form>
-
-        {users.map(user =>(
-            <ul key = {user.id}>
-                <li>Name: {user.name}</li>
-                <li>Email: {user.email}</li>
-                <li>Password: {user.password}</li>
-                <li>Role: {user.selectBox}</li>
-            </ul>
-        ))}
-      </div>
+                <h1>{newSmurf.name}</h1>
+                <label htmlFor="age">Age</label>
+                <input
+                type="text"
+                name="age"
+                placeholder="age"
+                value={newSmurf.age}
+                onChange={changeHandler}
+                />
+                <h1>{newSmurf.age}</h1>
+                <label htmlFor="height">Height</label>
+                <input
+                type="text"
+                name="height"
+                placeholder="height"
+                value={newSmurf.height}
+                onChange={changeHandler}
+                />
+                <h1>{newSmurf.height}</h1>
+            <button type="submit">Add Smurfs</button>
+            </form>
+            {/* <input className = "itemField"/>
+            <button onClick ={() => dispatch({ type: 'ADD_TODO', payload: `${document.querySelector('input').value}`})}>Add Smurf</button> */}
+            </div>
+        </div>
     )
-};
-const FormikLoginForm = withFormik({
-mapPropsToValues({ name, email, password, TOS, selectBox }){
-    return{
-        name: name || "",
-        email: email || "",
-        password: password || "",
-        TOS: TOS || false,
-        selectBox: selectBox || ""
-    };
-},
-  validationSchema: Yup.object().shape({
-    name: Yup.string().required("Try Again!").min(2, "Try again with your real name!"),
-    email: Yup.string().required("Please Please Please put something in here").email("Try again with a valid email address!"),
-    password: Yup.string().required("Make a password to avoid identity fraud").min(6, "Try again with a beefier password!")
-  }),
-  handleSubmit(values, {setStatus}) {
-      axios
-        .post("https://reqres.in/api/users", values)
-        .then(response =>{
-            setStatus(response.data)
-            console.log(response)
-        })
-  }
-})(LoginForm)
+}
 
-export default FormikLoginForm;
+const mapStateToProps = state => ({
+    smurf: state.smurf
+})
+export default connect(mapStateToProps, {postSmurf})(SmurfForm);

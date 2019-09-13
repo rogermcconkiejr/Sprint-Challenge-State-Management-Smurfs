@@ -3,8 +3,8 @@ import axios from 'axios';
 import "./App.css";
 //components
 import Smurfs from './Smurfs';
+import SmurfForm from './SmurfForm';
 //contexts
-import { SmurfContext } from '../contexts/SmurfContext';
 
 const App = () => {
   const [smurfs, setSmurfs] = useState([]);
@@ -25,6 +25,7 @@ const App = () => {
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
         <Smurfs />
+        <SmurfForm />
         
       </div>
     );
