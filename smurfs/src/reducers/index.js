@@ -4,7 +4,7 @@ import {
     ADD_SMURF
   } from "../actions";
   
-  const initialState = {
+export const initialState = {
     smurf:[],
     isFetching: false,
     error: "",

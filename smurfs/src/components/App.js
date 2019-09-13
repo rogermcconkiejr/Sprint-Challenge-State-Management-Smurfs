@@ -4,6 +4,7 @@ import "./App.css";
 //components
 import Smurfs from './Smurfs';
 import SmurfForm from './SmurfForm';
+import FormikForm from './FormikForm';
 //contexts
 
 const App = () => {
@@ -25,8 +26,7 @@ const App = () => {
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
         <Smurfs />
-        <SmurfForm />
-        
+        <FormikForm />
       </div>
     );
   }

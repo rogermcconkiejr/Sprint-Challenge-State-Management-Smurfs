@@ -16,10 +16,6 @@ export const getSmurf = () => dispatch => {
 }
 
 export const postSmurf = () => dispatch => {
-    
-    axios
-    .post("http://localhost:3333/smurfs")
-
-        dispatch({ type: ADD_SMURF, payload: ''});
+    dispatch({ type: ADD_SMURF, payload: " "});
     
 }
